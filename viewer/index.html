@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HouseCraft</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/viewer/styles.css">
+  <script type="importmap">{"imports":{"three":"/vendor/three/three.module.js"}}</script>
+  <script type="module" src="/viewer/viewer.mjs"></script>
+</head>
+<body>
+  <header class="site-header">
+    <span class="wordmark">HouseCraft</span>
+    <div class="file-controls">
+      <input type="file" id="project-file" accept=".json,application/json" hidden>
+      <button type="button" id="import-project" disabled>Open project</button>
+      <button type="button" id="export-project" class="primary" disabled>Download JSON</button>
+    </div>
+  </header>
+  <main>
+    <div class="project-header">
+      <div>
+        <h1 id="project-name">HouseCraft viewer</h1>
+        <p class="project-evidence" id="project-evidence"></p>
+      </div>
+      <div class="variant-control">
+        <label for="snapshot">House version</label>
+        <select id="snapshot" disabled></select>
+      </div>
+    </div>
+    <p class="error" id="project-error" role="alert" hidden></p>
+    <p class="visually-hidden" id="project-status" role="status"></p>
+    <div class="workspace">
+      <figure class="model">
+        <div class="viewport" id="viewport">
+          <p class="viewport-message" id="viewport-message">Loading the house…</p>
+          <div class="model-labels" id="model-labels" aria-hidden="true"></div>
+          <button type="button" id="reset-view" class="reset-view" disabled>Reset view</button>
+        </div>
+        <figcaption id="model-help">
+          <span class="pointer-help">Drag to orbit · Shift + drag to pan · Scroll to zoom</span>
+          <span class="touch-help">Drag to orbit · Two fingers to pan or zoom</span>
+          <span class="visually-hidden">With the model focused, use arrow keys to pan, Shift and arrow keys to orbit, and plus or minus to zoom.</span>
+          <span class="unit-label">Metres</span>
+        </figcaption>
+      </figure>
+      <aside class="details" aria-label="Selected house version" hidden>
+        <h2 id="snapshot-name"></h2>
+        <p class="snapshot-notes" id="snapshot-notes"></p>
+        <p class="review-note" id="review-note" hidden>Concept proposal. Structural feasibility has not been assessed.</p>
+        <section aria-labelledby="rooms-heading">
+          <h3 id="rooms-heading">Rooms</h3>
+          <ul class="room-list" id="room-list"></ul>
+        </section>
+        <section aria-labelledby="furniture-heading">
+          <h3 id="furniture-heading">Proxy furniture</h3>
+          <ul class="furniture-list" id="furniture-list"></ul>
+          <p class="dimension-key" id="dimension-key">Width × height × depth</p>
+        </section>
+        <details class="measurement-details">
+          <summary>Measurements and assumptions</summary>
+          <ul id="measurements"></ul>
+        </details>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

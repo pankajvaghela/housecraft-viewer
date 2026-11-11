@@ -1,0 +1,307 @@
+:root {
+  color-scheme: light;
+  --paper: #f6f4ee;
+  --card: #fbfaf7;
+  --ink: #282b26;
+  --muted: #595e52;
+  --line: #d7d6cc;
+  --accent: #334f3e;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: "Instrument Sans", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 0.94rem/1.5 var(--sans);
+}
+
+.site-header,
+main {
+  margin-inline: auto;
+  width: min(100% - clamp(2rem, 8vw, 8rem), 93rem);
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 4.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  font: bold 1.35rem/1 var(--serif);
+  letter-spacing: -0.055em;
+}
+
+.file-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+button, select {
+  min-height: 2.6rem;
+  border: 1px solid var(--line);
+  border-radius: 0.3rem;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.86rem;
+}
+
+button {
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:not(:disabled):hover { border-color: var(--accent); }
+button:disabled, select:disabled { opacity: 0.55; cursor: default; }
+.primary { background: var(--accent); border-color: var(--accent); color: white; }
+.primary:not(:disabled):hover { background: #254030; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+main { padding-block: clamp(1.7rem, 4.5vw, 3.75rem) 2.5rem; }
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 1.15rem 2rem;
+  margin-bottom: 1.35rem;
+}
+
+.project-header > div { min-width: 0; }
+
+h1, h2, h3, p, figure { margin: 0; }
+
+h1 {
+  max-width: 24ch;
+  font: 400 clamp(2rem, 4.4vw, 4.2rem)/1.04 var(--serif);
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+
+.project-evidence {
+  margin-top: 0.45rem;
+  color: var(--muted);
+}
+
+.project-evidence:empty { display: none; }
+
+.variant-control {
+  display: grid;
+  gap: 0.3rem;
+  min-inline-size: min(100%, 12rem);
+  inline-size: min(100%, 15rem);
+}
+
+.variant-control label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.variant-control select { padding-inline: 0.65rem; width: 100%; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 19rem);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.workspace:has(.details[hidden]) { grid-template-columns: minmax(0, 1fr); }
+
+.model, .details {
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  background: var(--card);
+}
+
+.viewport {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 23rem;
+  height: clamp(23rem, 62vh, 46rem);
+  border-radius: 0.55rem 0.55rem 0 0;
+  background: #e9e9e0;
+}
+
+.viewport canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.viewport canvas:active { cursor: grabbing; }
+.viewport canvas:focus-visible { outline-offset: -3px; }
+
+.viewport-message {
+  position: absolute;
+  inset: 1rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.reset-view { position: absolute; inset: 0.85rem 0.85rem auto auto; z-index: 2; }
+
+.model-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.model-label {
+  position: absolute;
+  inset: 0 auto auto 0;
+  max-width: 8rem;
+  padding: 0.12rem 0.38rem;
+  translate: -50% -100%;
+  overflow: hidden;
+  border: 1px solid #ffffff5c;
+  border-radius: 0.25rem;
+  background: #26332bea;
+  color: white;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+figcaption {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  padding: 0.7rem 0.95rem;
+  color: var(--muted);
+  font-size: 0.77rem;
+}
+
+.unit-label { margin-left: auto; }
+
+.touch-help { display: none; }
+@media (pointer: coarse) {
+  .pointer-help { display: none; }
+  .touch-help { display: inline; }
+}
+
+.details {
+  padding: 1.2rem;
+  overflow-wrap: anywhere;
+}
+
+.details h2 {
+  font: 400 1.75rem/1.15 var(--serif);
+  letter-spacing: -0.035em;
+}
+
+.details h3 { margin-bottom: 0.4rem; font-size: 0.83rem; font-weight: 700; }
+.details section, .measurement-details { margin-top: 1.1rem; padding-top: 0.85rem; border-top: 1px solid var(--line); }
+.snapshot-notes, .review-note { margin-top: 0.6rem; color: var(--muted); font-size: 0.85rem; }
+
+.room-list, .furniture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.87rem;
+}
+
+.furniture-list li {
+  display: grid;
+  grid-template-columns: 0.65rem 1fr;
+  align-items: start;
+  column-gap: 0.5rem;
+  padding-block: 0.25rem;
+}
+
+.swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  margin-top: 0.3rem;
+  border: 1px solid #292b2660;
+  border-radius: 0.15rem;
+}
+
+.dimensions, .dimension-key {
+  display: block;
+  color: var(--muted);
+  font-size: 0.77rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.dimension-key { margin-top: 0.45rem; }
+
+.measurement-details summary {
+  cursor: pointer;
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+
+.measurement-details ul {
+  list-style: none;
+  margin-block: 0.85rem 0;
+  padding: 0;
+}
+
+.measurement-details li {
+  margin-bottom: 0.8rem;
+  font-size: 0.83rem;
+}
+
+.measurement-source {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.measurement-note { margin-top: 0.2rem; }
+
+.error {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #d8aaa0;
+  border-radius: 0.3rem;
+  background: #fff1ec;
+  color: #8e3424;
+  overflow-wrap: anywhere;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 52rem) {
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 31rem) {
+  .site-header { padding-block: 0.65rem; }
+  .file-controls { gap: 0.3rem; }
+  .file-controls button { padding-inline: 0.5rem; font-size: 0.78rem; }
+  .viewport { min-height: 19rem; height: 58vh; }
+}

@@ -1,0 +1,6 @@
+---
+description: Repository documentation and approval checkpoints
+alwaysApply: true
+---
+
+Read and follow AGENTS.md at the repository root before work. Update the relevant docs automatically after substantial changes. Prepare and verify a checkpoint, ask before committing, and ask separately before pushing. Do not implement an automatic file watcher or publish unrelated changes.
